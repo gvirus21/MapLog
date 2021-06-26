@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <title>MapLog</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="card">
+      <div class="card__form" id="card__form">
+        <input
+          type="text"
+          class="card__form--heading"
+          name="card__form--heading"
+          placeholder="Heading"
+        />
+        <label for="card__form--heading"></label>
+
+        <input
+          type="text"
+          class="card__form--description"
+          name="card__form--description"
+          placeholder="Description"
+        />
+        <label for="card__form--description"></label>
+
+        <button class="card__form--btn" id="card__form--btn">submit</button>
+      </div>
+      <div class="card__comp--container">
+        <!-- <div class="card__comp--div-expand">
+          <div class="comp__info">
+            <h1 class="comp__info--tilte">Title</h1>
+            <p class="comp__info--description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+              velit, quidem assumenda aperiam fugiat minima, magni labore
+              aspernatur, quae facere tempore porro dicta illum commodi
+              doloribus? Labore culpa impedit reprehenderit omnis vero alias,
+              eaque nisi natus ab ratione eos eveniet?
+            </p>
+          </div>
+          <button class="comp--clear btn">clear</button>
+        </div>
+        <div class="card__comp--div">
+          <div class="comp__info">
+            <h1 class="comp__info--tilte">Title</h1>
+            <p class="comp__info--description">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit....
+            </p>
+          </div>
+          <button class="comp--clear btn">clear</button>
+        </div>
+        <div class="card__comp--div">
+          <div class="comp__info">
+            <h1 class="comp__info--tilte">Title</h1>
+            <p class="comp__info--description">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit....
+            </p>
+          </div>
+          <button class="comp--clear btn">clear</button>
+        </div>-->
+        <div class="card__comp--div">
+          <div class="comp__info">
+            <h1 class="comp__info--tilte">Title</h1>
+            <p class="comp__info--description">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit....
+            </p>
+          </div>
+          <button class="comp--clear btn">clear</button>
+        </div>
+      </div>
+      <div class="card__btn--container">
+        <button class="btn card__btn--clear-all" id="clear-all">
+          clear all
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
