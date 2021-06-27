@@ -6,52 +6,47 @@ const formHeading = document.querySelector(".card__form--heading");
 const formDescription = document.querySelector(".card__form--description");
 const formSubmit = document.getElementById("card__form--btn");
 
-class App {
-  #map;
-  #mapEvent;
-  constructor() {
-    //get location
-    this._getLoaction();
-  }
-  _getLoaction() {
+const app = () => {
+  let map;
+  const _getLoaction = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        this._loadMap.bind(this),
+        (pos) => {
+          _loadMap(pos);
+        },
         function () {
           console.error("Couldn't get the location");
         }
       );
     }
-  }
-  _loadMap(pos) {
+  };
+  const _loadMap = (pos) => {
     let { latitude: lat, longitude: lng } = pos.coords;
     let coords = [lat, lng];
 
-    this.#map = L.map("map").setView(coords, 13);
+    map = L.map("map").setView(coords, 13);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(this.#map);
+    }).addTo(map);
 
     //click on map
-
-    this.#map.on("click", this._showForm.bind(this));
-  }
-  _showForm() {
-    console.log("showform");
-    //make input form visible
-
-    form.style.display = "flex";
-    formSubmit.addEventListener("click", () => {
-      this._addField();
+    map.on("click", () => {
+      _showForm();
     });
-    // formSubmit.removeEventListener("click");
-    // formSubmit.removeEventListener("click", this._addField.bind(this));
-    //empty fields
-  }
+  };
 
-  _addField() {
+  const _showForm = () => {
+    //make input form visible
+    form.style.display = "flex";
+  };
+
+  formSubmit.addEventListener("click", () => {
+    console.log("add fields");
+    _addField();
+  });
+  const _addField = () => {
     if (!formHeading.value || !formDescription.value) {
       alert("empty fields");
     }
@@ -86,19 +81,22 @@ class App {
       compContainer.appendChild(comp);
 
       //hide form
-      this._hideForm();
+      _hideForm();
     }
-  }
+  };
 
-  _test() {
-    console.log("test");
-  }
-  _hideForm() {
-    console.log("hide");
+  const _hideForm = () => {
+    // console.log("hide");
     form.style.display = "none";
     formHeading.value = "";
     formDescription.value = "";
-  }
-}
+  };
 
-const app = new App();
+  // init
+  _getLoaction();
+};
+
+app();
+
+//problem is addEventListener of formsubmit button calls multiple times.
+//https://stackoverflow.com/users/14703843/gourav-kumar
