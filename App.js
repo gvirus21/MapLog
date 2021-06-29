@@ -70,8 +70,8 @@ const app = () => {
     formDescription.value = "";
   };
 
+  // create a comp div when called.
   const _createDiv = (heading, description) => {
-    console.log("create div called");
     //created comp div
     const comp = document.createElement("div");
     comp.classList.add("card__comp--div");
@@ -95,9 +95,14 @@ const app = () => {
     const clearBtn = document.createElement("button");
     clearBtn.classList.add("comp--clear");
     clearBtn.innerText = "clear";
+    //adding clear button functionality
+    clearBtn.addEventListener("click", (e) => {
+      _deleteDiv(e);
+    });
     comp.appendChild(clearBtn);
 
-    compContainer.appendChild(comp);
+    compContainer.prepend(comp);
+    // compContainer.appendChild(comp);
   };
 
   //reads data from localStorage
@@ -117,7 +122,6 @@ const app = () => {
   const _saveLocal = (heading, description) => {
     let inputData;
     if (localStorage.getItem("input__data") === null) {
-      console.log("present");
       inputData = [];
     } else {
       inputData = JSON.parse(localStorage.getItem("input__data"));
@@ -132,6 +136,45 @@ const app = () => {
     console.log("delete");
     localStorage.removeItem("input__data");
     location.reload();
+  };
+
+  //delete the comp div when called
+
+  const _deleteDiv = (e) => {
+    const item = e.target;
+    const parentDiv = item.parentElement;
+    //getting heading and description value from the parent element
+    const heading = parentDiv.children[0].children[0].innerText;
+    const description = parentDiv.children[0].children[1].innerText;
+
+    //have to call removeLocalStorage ______________
+    _removeLoacalStorage(heading);
+
+    //hide the parent div
+    parentDiv.classList.add("hideDiv");
+  };
+
+  //remove items from local storage when called.
+  const _removeLoacalStorage = (heading) => {
+    //reads data from the local storage
+    let inputData = JSON.parse(localStorage.getItem("input__data"));
+
+    const removeItem = (arr) => {
+      let newArr = [...arr];
+
+      const index = newArr.findIndex((element) => element[0] === heading);
+      console.log(index);
+      if (index || index === 0) {
+        newArr.splice(index, 1);
+        return newArr;
+      } else {
+        return "item not found";
+      }
+    };
+    //updated inputData value.
+    inputData = removeItem(inputData, heading);
+    //removing value from local storage.
+    localStorage.setItem("input__data", JSON.stringify(inputData));
   };
 
   //Eventlisteners
@@ -159,13 +202,13 @@ app();
 /* Everything working */
 /* next goals */
 
-//make clear buttons working.
-//then remove that cleared items from the saved location.
+//arrange adding of comp in reverse order--tick
 
-//make read more buttons for comp description
+//make clear buttons working.--tick
+
+//then remove that cleared items from the saved location. -- tick
 
 //make marker visible on form submit.
 //make map zoom on click on comp
 
-//arrange adding of comp in reverse order
 //Make minor changes in styling
